@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+declare -A MY_PROJECTS
+
+dropbox_base_dir=$HOME/Dropbox
+
+# Key = shortcut name
+# Value = directory to CD into
+
+MY_PROJECTS[contact_link]=$dropbox_base_dir/dev/Scala/contact_link
+MY_PROJECTS[chess_club]=$dropbox_base_dir/dev/ruby/chess_club
+MY_PROJECTS[pivotjs]=$dropbox_base_dir/dev/nodejs/pivot
+
+function dev() {
+  case "$1" in
+    euler)
+      the_dir=$HOME/Dropbox/dev/Euler/$2
+      cd "$the_dir"
+      ;;
+    reload)
+      source $HOME/Dropbox/dev/devexec
+      ;;
+    *)
+      the_dir=${MY_PROJECTS[$1]}
+      cd "$the_dir"
+      ;;
+  esac
+}
